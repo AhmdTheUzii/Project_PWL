@@ -95,10 +95,8 @@ export default function Sejarah() {
   return (
     <>
       <Head>
-        <title>Sejarah Majapahit - Portfolio Website</title>
-        <meta name="description" content="Sejarah tentang raja-raja Jawa dan kerajaan Majapahit" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+        <title>Sejarah Indonesia - Portfolio Website</title>
+        <meta name="description" content="Jelajahi sejarah kerajaan-kerajaan di Jawa dan Indonesia" />
       </Head>
       
       <div style={{ 
@@ -255,7 +253,11 @@ export default function Sejarah() {
           paddingTop: '120px',
           paddingBottom: '60px',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          background: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('/images/srj.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}>
           <div style={{
             maxWidth: '1200px',

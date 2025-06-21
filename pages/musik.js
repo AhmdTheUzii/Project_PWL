@@ -15,7 +15,7 @@ export default function Musik() {
     {
       id: 'gamelan',
       title: 'Gamelan Jawa',
-      image: '/images/gamelan.jpg',
+      image: '/images/gamelan jawa.jpg',
       description: 'Gamelan adalah ansambel musik tradisional Jawa yang terdiri dari berbagai instrumen perkusi.',
       content: `
         Gamelan Jawa adalah ansambel musik tradisional yang berasal dari Jawa, Indonesia. 
@@ -35,7 +35,7 @@ export default function Musik() {
     {
       id: 'angklung',
       title: 'Angklung',
-      image: '/images/angklung.jpg',
+      image: '/images/anklung.jpg',
       description: 'Angklung adalah alat musik tradisional Sunda yang terbuat dari bambu.',
       content: `
         Angklung adalah alat musik tradisional yang berasal dari tanah Sunda, Jawa Barat. 
@@ -54,7 +54,7 @@ export default function Musik() {
     {
       id: 'keroncong',
       title: 'Keroncong',
-      image: '/images/keroncong.jpg',
+      image: '/images/kroncong.jpg',
       description: 'Keroncong adalah genre musik tradisional Indonesia yang dipengaruhi oleh musik Portugis.',
       content: `
         Keroncong adalah genre musik tradisional Indonesia yang memiliki akar dari musik 
@@ -74,7 +74,7 @@ export default function Musik() {
     {
       id: 'dangdut',
       title: 'Dangdut',
-      image: '/images/dangdut.jpg',
+      image: '/images/dangdut.jpeg',
       description: 'Dangdut adalah genre musik populer Indonesia yang menggabungkan musik Melayu, India, dan Arab.',
       content: `
         Dangdut adalah genre musik populer Indonesia yang muncul pada tahun 1970-an. 
@@ -119,8 +119,6 @@ export default function Musik() {
       <Head>
         <title>Musik Indonesia - Portfolio Website</title>
         <meta name="description" content="Dengarkan musik tradisional dan modern Indonesia" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
       </Head>
       
       <div style={{ 
@@ -277,7 +275,11 @@ export default function Musik() {
           paddingTop: '120px',
           paddingBottom: '60px',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          background: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('/images/gamelan jawa.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}>
           <div style={{
             maxWidth: '1200px',

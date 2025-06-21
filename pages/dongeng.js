@@ -105,10 +105,8 @@ Pesan moral: Kesalahan dan dosa akan selalu mendapat balasan, dan tidak ada yang
   return (
     <>
       <Head>
-        <title>Dongeng Nusantara - Portfolio Website</title>
-        <meta name="description" content="Menyajikan cerita rakyat penuh pesan moral" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+        <title>Dongeng Indonesia - Portfolio Website</title>
+        <meta name="description" content="Kumpulan dongeng dan cerita rakyat Indonesia yang legendaris" />
       </Head>
       
       <div style={{ 
@@ -265,7 +263,11 @@ Pesan moral: Kesalahan dan dosa akan selalu mendapat balasan, dan tidak ada yang
           paddingTop: '120px',
           paddingBottom: '60px',
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          background: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('/images/dng.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}>
           <div style={{
             maxWidth: '1200px',

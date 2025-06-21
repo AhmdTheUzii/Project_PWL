@@ -555,7 +555,7 @@ export default function Dashboard() {
                   description: 'Pelajari sejarah kerajaan-kerajaan di Jawa dan Indonesia',
                   icon: 'fas fa-landmark',
                   color: '#f97316',
-                  image: '/images/srj.jpg',
+                  image: '/images/raden wijaya.jpg',
                   link: '/sejarah'
                 },
                 {
@@ -563,7 +563,7 @@ export default function Dashboard() {
                   description: 'Kumpulan dongeng dan cerita rakyat Indonesia',
                   icon: 'fas fa-book-open',
                   color: '#8b5cf6',
-                  image: '/images/dng.jpg',
+                  image: '/images/kancil.jpg',
                   link: '/dongeng'
                 },
                 {
@@ -571,7 +571,7 @@ export default function Dashboard() {
                   description: 'Karya puisi dan sastra Indonesia',
                   icon: 'fas fa-feather-alt',
                   color: '#ec4899',
-                  image: '/images/po.jpg',
+                  image: '/images/puisi.jpg',
                   link: '/puisi'
                 },
                 {
@@ -579,7 +579,7 @@ export default function Dashboard() {
                   description: 'Musik tradisional dan modern Indonesia',
                   icon: 'fas fa-music',
                   color: '#06b6d4',
-                  image: '/images/mo.jpg',
+                  image: '/images/musik.avif',
                   link: '/musik'
                 }
               ].map((content, index) => (
@@ -1097,7 +1097,7 @@ export default function Dashboard() {
               fontSize: '16px',
               marginBottom: '24px'
             }}>
-              &copy; 2024 Portfolio Website. Dibuat dengan ❤️ untuk Indonesia.
+              &copy; 2025 Portfolio Website. Dibuat dengan ❤️ untuk Indonesia.
             </p>
             <div style={{
               display: 'flex',
