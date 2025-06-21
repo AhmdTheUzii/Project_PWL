@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -71,11 +70,6 @@ export default function Register() {
 
   return (
     <>
-      <Head>
-        <title>Register - Portfolio Website</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-
       <div className="register-container">
         <div className="bg-animation">
           <div className="bg-particle bg-particle-1"></div>
@@ -290,24 +284,25 @@ export default function Register() {
 
         .input-group input {
           width: 100%;
-          padding: 12px 16px;
-          border-radius: 12px;
-          border: 2px solid rgba(249, 115, 22, 0.3);
-          background-color: rgba(17, 24, 39, 0.8);
-          color: white;
-          font-size: 14px;
+          padding: 12px 15px;
+          border: 1px solid #4b5563;
+          border-radius: 8px;
+          background-color: #ffffff;
+          color: #111827;
+          font-size: 16px;
           transition: all 0.3s ease;
-          box-sizing: border-box;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .input-group input::placeholder {
+          color: #9ca3af;
+          opacity: 0.7;
         }
 
         .input-group input:focus {
           outline: none;
           border-color: #f97316;
           box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-        }
-        
-        .input-group input::placeholder {
-          color: #6b7280;
         }
         
         .register-button {
