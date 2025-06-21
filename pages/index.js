@@ -747,7 +747,7 @@ export default function Home() {
                   e.target.style.boxShadow = '0 4px 15px rgba(249, 115, 22, 0.3)';
                 }}
               >
-                <i className="fas fa-user-plus"></i>
+                <i className="fas fa-user-plus" style={{ marginRight: '8px' }}></i>
                 Create Account
               </button>
               <button
@@ -777,7 +777,7 @@ export default function Home() {
                   e.target.style.boxShadow = 'none';
                 }}
               >
-                <i className="fas fa-sign-in-alt"></i>
+                <i className="fas fa-sign-in-alt" style={{ marginRight: '8px' }}></i>
                 Sign In
               </button>
             </div>
