@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -83,12 +82,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Head>
-        <title>Portfolio - {user?.username}</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-      </Head>
-
       <div style={{ 
         backgroundColor: '#111827',
         color: 'white',

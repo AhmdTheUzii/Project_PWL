@@ -1,15 +1,8 @@
-import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Ogi() {
   return (
     <>
-      <Head>
-        <title>Ahmad Fauzi - Portfolio</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
-      </Head>
-
       <div style={{ 
         backgroundColor: '#111827',
         color: 'white',
