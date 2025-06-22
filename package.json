@@ -2,15 +2,20 @@
   "name": "nextjs-login-demo",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.0",
+    "bcrypt": "^6.0.0",
+    "md5": "latest",
+    "mysql2": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "md5": "latest",
-    "mysql2": "latest"
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
-} 
+}

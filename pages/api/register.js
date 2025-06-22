@@ -1,98 +1,80 @@
-import md5 from 'md5';
-import mysql from 'mysql2/promise';
+import { createServerSupabaseClient } from '../../lib/supabase';
+import bcrypt from 'bcrypt';
 
-const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'db_users',
-  charset: 'utf8',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-};
+// Simple rate limiting
+const registrationAttempts = new Map();
+const SALT_ROUNDS = 10; // Standard practice for bcrypt
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password } = req.body;
 
-  // Validasi input
-  if (!username || !email || !password || !confirmPassword) {
-    return res.status(400).json({ 
-      success: false,
-      message: 'Semua field wajib diisi' 
-    });
+  // Input validation
+  if (!username || !email || !password) {
+    return res.status(400).json({ success: false, message: 'Username, email, dan password wajib diisi' });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ success: false, message: 'Password minimal harus 8 karakter' });
   }
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ 
-      success: false,
-      message: 'Password dan konfirmasi password tidak cocok' 
-    });
-  }
-
-  if (password.length < 6) {
-    return res.status(400).json({ 
-      success: false,
-      message: 'Password minimal 6 karakter' 
-    });
-  }
-
-  // Validasi email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ 
-      success: false,
-      message: 'Format email tidak valid' 
-    });
+  // Rate limiting
+  const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const attempts = registrationAttempts.get(clientIP) || 0;
+  if (attempts >= 10) {
+    return res.status(429).json({ success: false, message: 'Terlalu banyak percobaan registrasi. Coba lagi nanti.' });
   }
 
   try {
-    const pool = mysql.createPool(dbConfig);
-    
-    // Cek apakah username sudah ada
-    const [existingUsers] = await pool.execute(
-      'SELECT id FROM admin WHERE username = ? OR email = ?',
-      [username, email]
-    );
+    const supabase = createServerSupabaseClient();
 
-    if (existingUsers.length > 0) {
-      await pool.end();
-      return res.status(400).json({ 
-        success: false,
-        message: 'Username atau email sudah terdaftar' 
-      });
+    // Check if username or email already exists
+    const { data: existingUser, error: existingUserError } = await supabase
+      .from('admin')
+      .select('id')
+      .or(`username.eq.${username},email.eq.${email}`)
+      .limit(1);
+
+    if (existingUserError) {
+      console.error('Supabase check user error:', existingUserError);
+      return res.status(500).json({ success: false, message: 'Kesalahan server saat memeriksa data.' });
     }
 
-    // Hash password
-    const hashedPassword = md5(password);
-    
-    // Insert user baru
-    const [result] = await pool.execute(
-      'INSERT INTO admin (username, email, password) VALUES (?, ?, ?)',
-      [username, email, hashedPassword]
-    );
+    if (existingUser && existingUser.length > 0) {
+      return res.status(409).json({ success: false, message: 'Username atau email sudah terdaftar.' });
+    }
 
-    await pool.end();
+    // Hash password with bcrypt
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    // Insert new user into Supabase
+    const { data, error } = await supabase
+      .from('admin')
+      .insert([{ 
+        username, 
+        email, 
+        password: hashedPassword 
+      }])
+      .select();
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return res.status(500).json({ success: false, message: 'Gagal mendaftarkan pengguna baru.' });
+    }
+
+    registrationAttempts.set(clientIP, attempts + 1);
+    setTimeout(() => registrationAttempts.delete(clientIP), 15 * 60 * 1000);
 
     return res.status(201).json({ 
-      success: true,
-      message: 'Registrasi berhasil! Silakan login.',
-      user: {
-        id: result.insertId,
-        username,
-        email
-      }
+      success: true, 
+      message: 'Registrasi berhasil!',
+      user: data ? { id: data[0].id, username: data[0].username, email: data[0].email } : null
     });
 
   } catch (error) {
-    console.error('Database error:', error);
-    return res.status(500).json({ 
-      success: false,
-      message: 'Terjadi kesalahan server. Silakan coba lagi nanti.' 
-    });
+    console.error('Server error:', error);
+    return res.status(500).json({ success: false, message: 'Terjadi kesalahan server internal.' });
   }
 } 
